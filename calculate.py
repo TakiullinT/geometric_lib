@@ -7,6 +7,26 @@ funcs = ['perimeter', 'area']
 sizes = {}
 
 def calc(fig, func, size):
+    '''
+    
+    Вычисляет значение заданной функции для данной фигуры на основе её размеров. 
+    
+    Параметры: 
+    fig (str): название фигуры (должно быть 'circle' или 'square')
+    func (str): название функции (должно быть 'perimeter' или 'area')
+    size (list): список размеров фигуры. Для ввода ожидается одно значение (Для круга - радиус, для квадрата - длина стороны). 
+    
+    Возвращаемое значение: 
+    (float): Результат вычисления функции для данной фигуры. 
+    
+    Пример вызова: 
+    >> calc('circle', 'area', [11])
+    area of circle is 380.132711084365
+    
+    >> calc('square', 'perimeter', [5])
+    perimeter of square is 20
+    
+    '''
 	assert fig in figs
 	assert func in funcs
 
