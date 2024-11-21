@@ -28,7 +28,7 @@ jobs:
           echo "Ник на GitHub: $GITHUB_USERNAME"
 
       - name: Установка Python 3.13
-        uses:  actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           python-version: '3.13'
 
@@ -47,5 +47,10 @@ jobs:
 
       - name: Проверка кода на стиль
         run: |
-            pip install flake8
-            flake8 --ignore=F401 .
+          pip install flake8
+          flake8 .
+          
+      - name: Форматирование кода
+        run: |
+          pip install black
+          black .
