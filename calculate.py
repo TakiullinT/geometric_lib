@@ -1,103 +1,50 @@
-import unittest
-from calculate import calc
+figs = ['circle', 'square', 'triangle']
+funcs = ['perimeter', 'area']
+sizes = {
+    'circle_perimeter': 1,
+    'circle_area': 1,
+    'square_perimeter': 1,
+    'square_area': 1,
+    'triangle_perimeter': 3,
+    'triangle_area': 3
+}
 
 
-class TestingCalculateFunction(unittest.TestCase):
+def calc(fig, func, size):
+    assert fig in figs
+    assert func in funcs
 
-    def test_the_square_area(self):
-        fig = 'square'
-        func = 'area'
-        size = [1]
+    key = f'{fig}_{func}'
+    expected_size = sizes.get(key)
 
-        result_of_the_actions = calc(fig, func, size)
+    assert expected_size is not None
+    assert len(size) == expected_size
+    assert all(s >= 0 for s in size)
 
-        self.assertEqual(result_of_the_actions, 1)
+    if fig == 'triangle':
+        a, b, c = size
+        assert a + b > c and a + c > b and b + c > a
 
-    def test_the_circle_area(self):
-        fig = 'circle'
-        func = 'area'
-        size = [1]
-
-        result_of_the_actions = calc(fig, func, size)
-
-        self.assertEqual(result_of_the_actions, 3.141592653589793)
-
-    def test_the_triangle_area(self):
-        fig = 'triangle'
-        func = 'area'
-        size = [4, 5, 7]
-
-        result_of_the_actions = calc(fig, func, size)
-
-        self.assertEqual(result_of_the_actions, 8)
-
-    def test_the_negative_size(self):
-        fig = 'circle'
-        func = 'area'
-        size = [-1]
-
-        with self.assertRaises(AssertionError):
-            calc(fig, func, size)
-
-    def test_the_wrong_triangle_side_sizes(self):
-        fig = 'triangle'
-        func = 'area'
-        size = [1, 2, 15]
-
-        with self.assertRaises(AssertionError):
-            calc(fig, func, size)
-
-    def test_the_square_perimeter(self):
-        fig = 'square'
-        func = 'perimeter'
-        size = [1]
-
-        result_of_the_actions = calc(fig, func, size)
-
-        self.assertEqual(result_of_the_actions, 4)
-
-    def test_the_triangle_perimeter(self):
-        fig = 'triangle'
-        func = 'perimeter'
-        size = [4, 6, 7]
-
-        result_of_the_actions = calc(fig, func, size)
-
-        self.assertEqual(result_of_the_actions, 17)
-
-    def test_the_circle_perimeter(self):
-        fig = 'circle'
-        func = 'perimeter'
-        size = [1]
-
-        result_of_the_actions = calc(fig, func, size)
-
-        self.assertEqual(result_of_the_actions, 6.283185307179586)
-
-    def test_the_wrong_function(self):
-        fig = 'circle'
-        func = 'multiply'
-        size = [1]
-
-        with self.assertRaises(AssertionError):
-            calc(fig, func, size)
-
-    def test_the_wrong_figure(self):
-        fig = 'oval'
-        func = 'area'
-        size = [1]
-
-        with self.assertRaises(AssertionError):
-            calc(fig, func, size)
-
-    def test_the_wrong_size(self):
-        fig = 'circle'
-        func = 'area'
-        size = [1, 3]
-
-        with self.assertRaises(AssertionError):
-            calc(fig, func, size)
+    result = eval(
+        f'{fig}.{func}(*{size})'
+    )
+    return result
 
 
-if __name__ == '__main__':
-    unittest.main()
+if __name__ == "__main__":
+    func = ''
+    fig = ''
+    size = list()
+
+    while fig not in figs:
+        fig = input(f"Enter figure name, available are {figs}:\n")
+
+    while func not in funcs:
+        func = input(f"Enter function name, available are {funcs}:\n")
+
+    while len(size) != sizes.get(f"{fig}_{func}", 1):
+        size = list(map(int, input(
+            "Input figure sizes separated by space, 1 for circle and square\n"
+        ).split(' ')))
+
+    calc(fig, func, size)
