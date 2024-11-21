@@ -1,7 +1,4 @@
 import unittest
-from circle import area, perimeter
-from square import area, perimeter
-from triangle import area, perimeter
 from calculate import calc
 
 
