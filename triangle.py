@@ -8,8 +8,8 @@ def area(a, b, c):
 
 
 def perimeter(a, b, c):
-    if a <= 0 or b <= 0 or c <= 0:
-        raise ValueError("Стороны треугольника должны быть положительными")
-    if a + b <= c or a + c <= b or b + c <= a:
-        raise ValueError("Стороны не могут образовать треугольник")
+    if a == 0 and b == 0 and c == 0:
+        return 0
+    assert a + b > c and a + c > b and b + c > a
+    assert all(s >= 0 for s in (a, b, c))
     return a + b + c
