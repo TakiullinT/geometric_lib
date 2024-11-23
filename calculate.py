@@ -30,7 +30,8 @@ def calc(fig, func, size):
         assert a + b > c and a + c > b and b + c > a
 
     result = eval(
-        f'{fig}.{func}(*{size})'
+        f'{fig}.{func}(*{size})',
+        {"circle": circle, "square": square, "triangle": triangle}
     )
     return result
 
