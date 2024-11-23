@@ -1,12 +1,9 @@
 def area(a, b, c):
-    expected_size = 3
     assert a + b > c and a + c > b and b + c > a
-    assert a is not None
-    assert b is not None 
-    assert c is not None
     p = (a + b + c) / 2
-    assert len([a, b, c]) == expected_size
     assert all(s >= 0 for s in (a, b, c))
+    expected_size = 3
+    assert len([a, b, c]) == expected_size
     return (p * (p - a) * (p - b) * (p - c)) ** 0.5
 
 
