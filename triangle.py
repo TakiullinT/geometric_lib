@@ -8,5 +8,4 @@ def area(a, b, c):
 
 
 def perimeter(a, b, c):
-    assert a + b > c and a + c > b and b + c > a
     return a + b + c
